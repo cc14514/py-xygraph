@@ -83,7 +83,8 @@ class XYGraph:
         }
         
         try:
-            y_values = eval(expression, {"__builtins__": {}}, safe_dict)
+            # 允许使用内置函数以解决 Python 3.14/Numpy 2.x 中的兼容性问题
+            y_values = eval(expression, {}, safe_dict)
             return y_values
         except Exception as e:
             raise ValueError(f"计算表达式时出错: {str(e)}")
@@ -131,11 +132,18 @@ class XYGraph:
             plt.legend(fontsize=10)
             
             # 自动调整 y 轴范围
-            plt.ylim([np.min(y_values) - 1, np.max(y_values) + 1])
-            
-            print(f"✅ 成功绘制 {self.points} 个点")
-            print(f"📊 x 范围: [{self.x_min}, {self.x_max}]")
-            print(f"📊 y 范围: [{np.min(y_values):.2f}, {np.max(y_values):.2f}]")
+            valid_y = y_values[np.isfinite(y_values)]
+            if len(valid_y) > 0:
+                y_min, y_max = np.min(valid_y), np.max(valid_y)
+                margin = 1.0 if y_min == y_max else (y_max - y_min) * 0.1
+                plt.ylim([y_min - margin, y_max + margin])
+                
+                print(f"✅ 成功绘制 {self.points} 个点")
+                print(f"📊 x 范围: [{self.x_min}, {self.x_max}]")
+                print(f"📊 y 范围: [{y_min:.2f}, {y_max:.2f}] (有效点: {len(valid_y)}/{len(y_values)})")
+            else:
+                print(f"⚠️ 警告: 没有有效的 y 值可供绘制 (可能是定义域问题)")
+                plt.ylim([-10, 10]) # 默认范围
             
             # 保存图形
             if save_path:

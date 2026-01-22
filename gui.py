@@ -65,9 +65,10 @@ def interactive_mode():
             # 更新 x 轴范围
             ax.set_xlim(state['xmin'], state['xmax'])
 
-            # 自动调整 y 轴范围
-            if np.all(np.isfinite(y_values)):
-                y_min, y_max = np.min(y_values), np.max(y_values)
+            # 自动调整 y 轴范围 (基于有效值)
+            valid_y = y_values[np.isfinite(y_values)]
+            if len(valid_y) > 0:
+                y_min, y_max = np.min(valid_y), np.max(valid_y)
                 if y_min == y_max:
                     y_margin = 1.0
                 else:
@@ -75,7 +76,13 @@ def interactive_mode():
                 ax.set_ylim(y_min - y_margin, y_max + y_margin)
             
             plt.draw()
-            print(f"✅ 成功绘制: {state['equation']}, 范围 [{state['xmin']}, {state['xmax']}]")
+            
+            valid_count = len(valid_y)
+            total_count = len(y_values)
+            if valid_count < total_count:
+                print(f"✅ 成功绘制: {state['equation']} (有效点: {valid_count}/{total_count})")
+            else:
+                print(f"✅ 成功绘制: {state['equation']}")
             
         except Exception as e:
             error_msg = str(e)
