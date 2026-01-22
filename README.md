@@ -21,10 +21,10 @@
 
 ## �️ 效果展示
 
-| $y=x^2$ (抛物线) | $y=\sin(x)$ (正弦曲线) |
+| $y=-x^2$ (抛物线) | $y=\sin(x)$ (正弦曲线) |
 | :---: | :---: |
 | <img src="examples/x2.png" width="400"> | <img src="examples/sinx.png" width="400"> |
-| **$y=x^3$ (三次函数)** | **$y=\log(x)$ (对数函数)** |
+| **$y=x^3+x^2+1$ (三次函数)** | **$y=\log(x^2)$ (对数函数)** |
 | <img src="examples/x3.png" width="400"> | <img src="examples/logx.png" width="400"> |
 
 ## �🚀 快速开始
