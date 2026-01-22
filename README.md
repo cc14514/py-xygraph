@@ -19,7 +19,15 @@
     *   默认 500 个采样点，曲线平滑无折角。
     *   自动适配中文字体（支持 macOS/Windows/Linux 常见字体）。
 
-## 🚀 快速开始
+## �️ 效果展示
+
+| $y=x^2$ (抛物线) | $y=\sin(x)$ (正弦曲线) |
+| :---: | :---: |
+| <img src="examples/x2.png" width="400"> | <img src="examples/sinx.png" width="400"> |
+| **$y=x^3$ (三次函数)** | **$y=\log(x)$ (对数函数)** |
+| <img src="examples/x3.png" width="400"> | <img src="examples/logx.png" width="400"> |
+
+## �🚀 快速开始
 
 ### 方式 1：一键启动（推荐）
 
