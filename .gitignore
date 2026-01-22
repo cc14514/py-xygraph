@@ -1,0 +1,14 @@
+myenv/
+__pycache__/
+*.pyc
+.DS_Store
+.vscode/
+.idea/
+.env
+.env.*
+logs/
+*.log
+data/
+output/
+.ipynb_checkpoints/
+.github/
